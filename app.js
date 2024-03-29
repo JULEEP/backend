@@ -14,14 +14,14 @@ app.use(cors());
 // });
 
 // Routes 
-// app.get('/', (req, res) => {
-//     res.send('Hello World');
-// });
+app.get('/', (req, res) => {
+     res.send('Hello World');
+ });
 
 
-// app.get('/employees', (req, res) => {
-//     res.send('Employees');
-// });
+//app.get('/employees', (req, res) => {
+   // res.send('Employees');
+ //});
 
 const connectDB = require('./config/db');
 dotenv.config({path: './config/config.env'})
