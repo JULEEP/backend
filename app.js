@@ -2,12 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const connectDatabase = require('./db');
 
-
+dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+
 // Middleware
 // app.use('/employees', () => {
 //     console.log('Middleware Running');
@@ -15,22 +17,17 @@ app.use(cors());
 
 // Routes 
 app.get('/', (req, res) => {
-     res.send('Hello World');
- });
-
+    res.send('Hello World');
+});
 
 //app.get('/employees', (req, res) => {
-   // res.send('Employees');
- //});
+//     res.send('Employees');
+// });
 
-const connectDB = require('./config/db');
-dotenv.config({path: './config/config.env'})
+connectDatabase();
 
-connectDB();
+const port = process.env.PORT || 3000; // Use the PORT environment variable if available, or default to 3000
 
-app.use('/', require('./routes/index'));
-
-app.listen(3000);
-
-
-
+const server = app.listen(port, () => {
+    console.log(`ShopKart's Server is running on http://localhost:${port}`);
+});
